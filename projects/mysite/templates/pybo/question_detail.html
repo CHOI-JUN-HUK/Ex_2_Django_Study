@@ -19,6 +19,11 @@
                 <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'pybo:question_delete' question.id %}">삭제</a>
             </div>
             {% endif %}
+            <div>
+                <a href="{% url 'pybo:comment_create_question' question.id%}" class="small"><small>댓글 추가</small></a>
+                <p>{{ comment.author }}</p>
+
+            </div>
         </div>
     
 
@@ -33,6 +38,13 @@
                         {{ answer.author}}
                     </div>
                 </div>
+                {% if request.user == answer.author %}
+                <div class="my-3">
+                    <a href="{% url 'pybo:answer_modify' answer.id%}" class='btn btn-sm btn-outline-secondary'>수정</a>
+                    <a href="#" class='delete btn btn-sm btn-outline-secondary' data-uri="{% url 'pybo:answer_delete' answer.id%}">삭제</a>
+                </div>
+                {% endif %}
+
             </div>
         </div>
         {% endfor %}
